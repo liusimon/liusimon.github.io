@@ -15,7 +15,7 @@ theme                  : "minimal-mistakes-jekyll"
 minimal_mistakes_skin    : "sunrise" # "default", "air", "aqua", "contrast", "dark", "dirt", "neon", "mint", "plum", "sunrise"
 
 # Site Settings
-locale                   : "zh_CN"
+locale                   : "zh-CN"
 title                    : "春见 - See You In Spring"
 title_separator          : "-"
 name                     : "在春天里遇见你"
