@@ -1,4 +1,4 @@
-pom.xml增加对Spring Boot Admin Serer的依赖(只有spring-boot-admin-starter-server是关键，后面的几个依赖是因为我的项目采用NACOS-阿里巴巴开源的Spring Cloud配置和服务注册与发现服务器所需要的客户端依赖)：  
+pom.xml增加对Spring Boot Admin Server的依赖(只有spring-boot-admin-starter-server是关键，后面的几个依赖是因为我的项目采用NACOS-阿里巴巴开源的Spring Cloud配置和服务注册与发现服务器所需要的客户端依赖)：  
   
     <dependency>  
         <groupId>de.codecentric</groupId>  
@@ -56,4 +56,4 @@ pom.xml增加对Spring Boot Admin Serer的依赖(只有spring-boot-admin-starter
     @EnableDiscoveryClient
     @EnableAdminServer
 
-其中@EnableAdminServer的作用是利用Spring Cloud的服务发现来将各微服务整合到Spring Boot Admin Server中集中监控，此时各微服务并不需要添加Spring Boot Admin Server到项目中。  
+其中@EnableAdminServer的作用是利用Spring Cloud的服务发现来将各微服务整合到Spring Boot Admin Server中集中监控，此时各微服务并不需要添加Spring Boot Admin Client到项目中。  
