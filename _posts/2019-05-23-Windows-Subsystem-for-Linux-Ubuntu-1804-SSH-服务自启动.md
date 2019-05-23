@@ -1,59 +1,31 @@
-在项目的pom.xml里增加对Spring Boot Admin Server的依赖(只有spring-boot-admin-starter-server是主要依赖，后面的几个依赖是因为我的项目采用NACOS-阿里巴巴开源的Spring Cloud配置和服务注册与发现服务器所需要的客户端依赖)：  
+Win10 wsl 子系统ssh服务自启动设置, 步骤如下：  
   
-    <dependency>  
-        <groupId>de.codecentric</groupId>  
-        <artifactId>spring-boot-admin-starter-server</artifactId>  
-        <version>2.1.4</version>  
-    </dependency>  
-    
-    <dependency>  
-        <groupId>org.springframework.cloud</groupId>  
-        <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>  
-        <exclusions>  
-            <exclusion>  
-                <artifactId>guava</artifactId>  
-                <groupId>com.google.guava</groupId>  
-            </exclusion>  
-            <exclusion>  
-                <artifactId>nacos-client</artifactId>  
-                <groupId>com.alibaba.nacos</groupId>  
-            </exclusion>  
-        </exclusions>  
-    </dependency>  
-    <dependency>  
-        <groupId>com.alibaba.nacos</groupId>  
-        <artifactId>nacos-client</artifactId>  
-        <exclusions>  
-            <exclusion>  
-                <artifactId>guava</artifactId>  
-                <groupId>com.google.guava</groupId>  
-            </exclusion>  
-        </exclusions>  
-        <!--<type>pom</type>-->  
-    </dependency>  
-    <dependency>  
-        <groupId>org.springframework.cloud</groupId>  
-        <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>  
-        <exclusions>  
-            <exclusion>  
-                <artifactId>guava</artifactId>  
-                <groupId>com.google.guava</groupId>  
-            </exclusion>  
-            <exclusion>  
-                <artifactId>nacos-client</artifactId>  
-                <groupId>com.alibaba.nacos</groupId>  
-            </exclusion>  
-        </exclusions>  
-    </dependency>  
-    <dependency>  
-        <groupId>com.google.guava</groupId>  
-        <artifactId>guava</artifactId>  
-        <version>27.1-jre</version>  
-    </dependency>  
-  
-接下来在Spring Boot的启动类(一般是XxxApplication)加上注解
+    Linux版本：Ubuntu 18.04
 
-    @EnableDiscoveryClient
-    @EnableAdminServer
+创建并编辑 /etc/init.wsl
 
-其中@EnableDiscoveryClient的作用是利用Spring Cloud的服务发现来将各微服务整合到Spring Boot Admin Server中集中监控，从而不再需要添加Spring Boot Admin Client到微服务的项目中。  
+    sudo nano /etc/init.wsl
+
+加入如下内容：
+
+    #! /bin/sh
+    /etc/init.d/ssh $1
+
+添加执行权限:
+
+    sudo chmod +x /etc/init.wsl
+
+添加文件/etc/sudoers.d/nopasswd，避免输入密码：
+
+    sudo nano /etc/sudoers.d/nopasswd
+
+加入如下内容：
+
+    %sudo ALL=NOPASSWD: /etc/init.wsl
+
+在 Windows 启动或者登陆的时候执行该脚本, 在 Windows 中，开始-运行里面输入shell:startup打开启动文件夹，创建文件startservice.vbs，脚本内容：
+
+    Set ws = CreateObject("Wscript.Shell")
+    ws.run "ubuntu1804 run sudo /etc/init.wsl start", vbhide
+
+如果你用的是 ubuntu18.04 的发行版，那么修改上面脚本里面的ubuntu1804为你用的发行版运行命令，如：debian 
