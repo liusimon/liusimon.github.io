@@ -28,4 +28,4 @@ Win10 wsl 子系统ssh服务自启动设置, 步骤如下：
     Set ws = CreateObject("Wscript.Shell")
     ws.run "ubuntu1804 run sudo /etc/init.wsl start", vbhide
 
-如果你用的是 ubuntu18.04 的发行版，那么修改上面脚本里面的ubuntu1804为你用的发行版运行命令，如：debian 
+如果你用的不是 ubuntu18.04 的发行版，那么修改上面脚本里面的ubuntu1804为你用的发行版运行命令，如：debian 
